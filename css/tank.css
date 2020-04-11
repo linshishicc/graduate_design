@@ -1,0 +1,702 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+html {
+    width: 1000px;
+    height: 700px;
+    position: absolute;
+    left: 50%;
+    margin-left: -500px;
+    margin-top: 100px;
+}
+
+body {
+    background: rgba(36, 35, 35, 0.8);
+    /* margin-top: 200px; */
+}
+
+#container {
+    background-size: 100% 100% !important;
+}
+
+#progress,
+#home,
+#container,
+#helpCont,
+#levelWin,
+#gameover,
+#startGame {
+    /* margin: 0 auto; */
+    width: 1000px;
+    height: 700px;
+    overflow: hidden;
+    border: 3px solid #292929;
+    position: relative;
+}
+
+#progress {
+    background: white;
+    font-family: Comic Sans MS, Times New Roman;
+}
+
+#bar {
+    text-align: center;
+    width: 200px;
+    height: 180px;
+    left: 610px;
+    font-size: 11px;
+}
+
+#percent {
+    top: 20px;
+    left: 15px;
+}
+
+#loading {
+    top: -10px;
+    left: 15px;
+}
+
+#home {
+    background: url(../images/bg1.jpg) no-repeat;
+    background-size: auto 100%;
+}
+
+#welcome {
+    font-size: 100px;
+    font-weight: bolder;
+    text-align: center;
+    padding-top: 100px;
+}
+
+#helpCont {
+    background: url(../images/modewin/help0.bmp) no-repeat;
+    background-size: 100% 100%;
+}
+
+#levelWin {
+    background: url(../images/levelWin/bgrnd.bmp) no-repeat;
+    background-size: 100% 100%;
+}
+
+#gameover {
+    background: url(../images/gameover.bmp) no-repeat;
+    background-size: 100% 100%;
+}
+
+#percent,
+#loading,
+#ln,
+#goMenu,
+#continue,
+#info .selected,
+#gameMenu,
+.levelnum {
+    position: relative;
+}
+
+#bar,
+#star,
+#star2,
+#help,
+#exit,
+#option,
+#optionWin,
+.king,
+.tank,
+.bullet,
+.block,
+.back,
+.mButton,
+.meButton,
+.lawn,
+.snowfield,
+.sandlot,
+.random,
+.confirm,
+.cancel,
+.level_1,
+.level_2,
+.level_3,
+.level_4,
+#tc_enemyR,
+#tc_enemyB,
+#tc_enemyY,
+#tc_enemyG,
+#goHome,
+#info,
+#level,
+#right,
+.born,
+#score_p1,
+#score_p2,
+#tc_p1,
+#tc_p2,
+#round,
+#wOrl,
+#p1r,
+#p1g,
+#p1y,
+#p1b,
+#p2r,
+#p2g,
+#p2y,
+#p2b,
+#p1Ttl,
+#p2Ttl,
+#anyKey,
+#login {
+    position: absolute;
+}
+
+.tank,
+.bullet {
+    width: 36px;
+    height: 36px;
+    z-index: 2;
+}
+
+.block {
+    width: 36px;
+    height: 36px;
+}
+
+#star,
+#star2,
+#help,
+#exit,
+#option,
+#login {
+    background: #989898;
+    color: #fff;
+    font-size: 22px;
+    height: 36px;
+    width: 140px;
+    top: 200px;
+    left: 430px;
+    cursor: pointer;
+    border: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#star:hover,
+#star2:hover,
+#help:hover,
+#exit:hover,
+#option:hover,
+#login:hover {
+    background: #000;
+    color: yellow;
+    border: 2px solid #fff;
+}
+
+#login {
+    top: 150px;
+}
+
+#star2 {
+    top: 250px;
+    /* left: 330px; */
+}
+
+#help {
+    top: 300px;
+    /* left: 350px; */
+}
+
+#exit {
+    top: 400px;
+    /* left: 350px; */
+}
+
+#option {
+    top: 350px;
+    /* left: 350px; */
+}
+
+#optionWin {
+    background: url(../images/optionwin/bgrnd.bmp) no-repeat;
+    height: 0;
+    width: 0;
+    top: 588px;
+    left: 800px;
+    z-index: 100px;
+    background-size: 100% 100%;
+}
+
+.back {
+    /* background: url(../images/modewin/help-back.bmp) 0% 50% no-repeat; */
+    background: #606060;
+    height: 35px;
+    width: 120px;
+    top: 549px;
+    left: 639px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    line-height: 35px;
+}
+
+.mButton,
+.meButton {
+    background: url(../images/optionwin/key.bmp) no-repeat;
+    height: 23px;
+    left: 84px;
+}
+
+.mButton {
+    width: 205px;
+    top: 82px;
+}
+
+.meButton {
+    width: 10px;
+    top: 121px;
+}
+
+.lawn,
+.snowfield,
+.sandlot,
+.random {
+    height: 23px;
+    width: 24px;
+}
+
+.lawn {
+    top: 254px;
+    left: 124px;
+}
+
+.snowfield {
+    top: 254px;
+    left: 267px;
+}
+
+.sandlot {
+    top: 315px;
+    left: 124px
+}
+
+.random {
+    top: 315px;
+    left: 268px
+}
+
+.checked {
+    background: url(../images/optionwin/checkbox2.png) no-repeat;
+}
+
+.confirm {
+    background: url(../images/optionwin/confirm.bmp) 0% 50% no-repeat;
+    height: 43px;
+    width: 156px;
+    top: 358px;
+    left: 2px;
+}
+
+.cancel {
+    background: url(../images/optionwin/exit.bmp) 0% 50% no-repeat;
+    height: 43px;
+    width: 157px;
+    top: 358px;
+    left: 160px;
+}
+
+.level_1,
+.level_2,
+.level_3,
+.level_4 {
+    /* background: url(../images/levelWin/btn.png) 0% 50% no-repeat; */
+    background: none !important;
+    cursor: pointer;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    height: 45px;
+    width: 160px;
+    border-radius: 5px;
+    border: 1px solid #fff;
+}
+
+.level_1 {
+    top: 216px;
+    left: 77px;
+}
+
+.level_2 {
+    top: 216px;
+    left: 245px;
+}
+
+.level_3 {
+    top: 216px;
+    left: 412px;
+}
+
+.level_4 {
+    top: 216px;
+    left: 580px;
+}
+
+.iss {
+    height: 39px;
+}
+
+#levelWin .selected {
+    /* background: url(../images/levelWin/choose.png); */
+    color: red;
+    /* height: 40px;
+    width: 130px; */
+}
+
+.levelnum {
+    top: 10px;
+}
+
+#level {
+    background: url(../images/level.png) no-repeat;
+    height: 160px;
+    width: 320px;
+    top: 200px;
+    left: 190px;
+    z-index: 10;
+}
+
+#ln {
+    height: 66px;
+    width: 50px;
+    top: 80px;
+    left: 135px;
+    z-index: 11;
+}
+
+#goHome {
+    background: url(../images/exit.png) 0% 50% no-repeat;
+    height: 98px;
+    width: 96px;
+    top: 510px;
+    left: 701px;
+}
+
+#info {
+    background: url(../images/info/bgrnd.bmp) no-repeat;
+    height: 161px;
+    width: 194px;
+    top: -350px;
+    left: 260px;
+    z-index: 12;
+}
+
+#goMenu,
+#continue {
+    height: 30px;
+    width: 133px;
+    left: 51px;
+    z-index: 13;
+}
+
+#goMenu {
+    background: url(../images/info/gomenu.bmp) no-repeat;
+    top: 55px;
+}
+
+#continue {
+    background: url(../images/info/continue.bmp) no-repeat;
+    top: 71px;
+}
+
+#info .selected {
+    background: url(../images/info/Arrow.png);
+    height: 33px;
+    width: 43px;
+    top: -1px;
+    left: -42px;
+}
+
+.born {
+    height: 50px;
+    width: 34px;
+    z-index: 1;
+}
+
+#tc_enemyR,
+#tc_enemyB,
+#tc_enemyY,
+#tc_enemyG {
+    left: 920px;
+}
+
+#tc_enemyR {
+    top: 122px;
+}
+
+#tc_enemyB {
+    top: 183px;
+}
+
+#tc_enemyY {
+    top: 245px;
+}
+
+#tc_enemyG {
+    top: 308px;
+}
+
+#tc_p1 {
+    top: 655px;
+    left: 135px;
+}
+
+#tc_p2 {
+    top: 655px;
+    left: 420px;
+}
+
+#score_p1 {
+    top: 655px;
+    left: 220px;
+}
+
+#score_p2 {
+    top: 655px;
+    left: 510px;
+}
+
+#round {
+    top: 525px;
+    left: 920px;
+}
+
+.king {
+    height: 50px;
+    width: 36px;
+    z-index: 1;
+}
+
+#wOrl {
+    height: 30px;
+    width: 117px;
+    top: 205px;
+    left: 360px;
+}
+
+#p1r {
+    top: 295px;
+    left: 274px;
+}
+
+#p1b {
+    top: 337px;
+    left: 274px;
+}
+
+#p1y {
+    top: 379px;
+    left: 274px;
+}
+
+#p1g {
+    top: 424px;
+    left: 274px;
+}
+
+#p2r {
+    top: 295px;
+    left: 484px;
+}
+
+#p2b {
+    top: 337px;
+    left: 484px;
+}
+
+#p2y {
+    top: 379px;
+    left: 484px;
+}
+
+#p2g {
+    top: 424px;
+    left: 484px;
+}
+
+#p1Ttl {
+    top: 486px;
+    left: 289px;
+}
+
+#p2Ttl {
+    top: 486px;
+    left: 506px;
+}
+
+#anyKey {
+    height: 22px;
+    width: 132px;
+    top: 562px;
+    left: 360px;
+}
+
+.presscontinue {
+    background: url(../images/presscontinue.png) no-repeat;
+}
+
+.login {
+    background: url(../images/login.png) no-repeat;
+    width: 400px;
+    height: 0;
+    position: absolute;
+    top: -320px;
+    left: 200px;
+    background-size: 100% 100%;
+    z-index: 101;
+    transition-property: top, height;
+    transition-duration: 0.5s, 0.5s;
+    /* display: none; */
+}
+
+.login .close {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: url('../images/close.png');
+    background-size: 100% 100%;
+    cursor: pointer;
+}
+
+.login .register-content,
+.login .login-content {
+    width: 100%;
+    height: 250px;
+    margin-top: 50px;
+    display: none;
+    text-align: center;
+}
+
+.login .register-content .name,
+.login .login-content .name {
+    color: #cca25a;
+    margin: 0 auto;
+    font-size: 24px;
+    font-weight: 700;
+    display: inline-block;
+    padding-bottom: 20px;
+}
+
+.login .register-content .register,
+.login .login-content .register {
+    width: 250px;
+    height: 40px;
+    background: url('../images/btn_03.png');
+    border: none;
+    font-size: 20px;
+    display: block;
+    line-height: 40px;
+    margin: 40px auto 5px;
+}
+
+.to-login,
+.to-register {
+    margin-right: 75px;
+    float: right;
+    font-size: 12px;
+    color: #fff;
+}
+
+.to-login a,
+.to-register a {
+    color: #cca25a;
+}
+
+input::-webkit-input-placeholder {
+    color: #fff;
+    font-size: 14px;
+}
+
+.login input {
+    width: 250px;
+    height: 28px;
+    font-size: 16px;
+    background-color: #616059;
+    margin: 10px auto;
+    display: block;
+    border: none;
+    color: #fff;
+    padding-left: 10px;
+}
+
+
+/* .login:hover {
+    height: 320px;
+    top: 120px;
+} */
+
+.zhezhao {
+    width: 1000px;
+    height: 700px;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.ranking {
+    width: 500px;
+    height: 380px;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 100;
+    position: absolute;
+    top: 110px;
+    left: 150px;
+    text-align: center;
+    color: #cca25a;
+    display: none;
+}
+
+.ranking .desc {
+    font-size: 24px;
+    line-height: 40px;
+    display: inline-block;
+    padding-top: 30px;
+}
+
+.ranking table {
+    width: 100%;
+}
+
+.ranking table th,
+.ranking table td {
+    width: 33.3%;
+    height: 40px;
+}
+
+.ranking .close {
+    width: 35px;
+    height: 35px;
+    background: url('../images/close.png');
+    background-size: 100% 100%;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}

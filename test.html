@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .animated_div {
+        font-size: 12px;
+        width: 50px;
+        height: 40px;
+        background: #92B901;
+        color: #ffffff;
+        position: relative;
+        font-weight: bold;
+        padding: 8px 8px 0px 8px;
+        margin: 5px;
+        -webkit-transition: -webkit-transform 1s, background 1s, width 1s, height 1s, font-size 1s;
+        -o-transition-property: width, height, -o-transform, background, font-size;
+        -o-transition-duration: 1s, 1s, 1s, 1s, 1s;
+        -moz-transition-property: width, height, -o-transform, background, font-size;
+        -moz-transition-duration: 1s, 1s, 1s, 1s, 1s;
+        transition-property: width, height, transform, background, font-size;
+        transition-duration: 1s, 1s, 1s, 1s, 1s;
+    }
+    
+    .animated_div:hover {
+        -moz-transform: rotate(720deg);
+        -webkit-transform: rotate(720deg);
+        -o-transform: rotate(720deg);
+        transform: rotate(720deg);
+        padding: 12px 8px 0 15px;
+        background: #1ec7e6;
+        width: 75px;
+        height: 60px;
+        font-size: 16px;
+    }
+</style>
+
+<body>
+    <div class="animated_div">鼠标碰我(*^__^*)</div>
+</body>
+
+</html>

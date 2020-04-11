@@ -1,1 +1,200 @@
-test1
+<!doctype html>
+<html>
+
+<head>
+    <title>坦克游戏</title>
+    <link href="images/tank.ico" rel="shortcut icon">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="css/tank.css">
+    <script type="text/javascript" src="js/util.js"></script>
+    <script type="text/javascript" src="js/tank.config.js"></script>
+    <script type="text/javascript" src="js/tank.namespace.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/tank.progress.js"></script>
+    <script type="text/javascript" src="js/tank.main.js"></script>
+    <script type="text/javascript" src="js/tank.factory.js"></script>
+    <script type="text/javascript" src="js/tankwar.js"></script>
+
+    <script>
+        $(function() {
+            TankWarMng.init();
+        });
+    </script>
+</head>
+
+<body style="overflow:hidden">
+    <!-- welcome scene -->
+    <div id="progress" style="display: none;">
+        <div id="welcome">
+            Tank War 2020
+        </div>
+        <div id="bar">
+            <div id="percent" style="display: none;">
+                <span>0</span>%
+            </div>
+            <img src="images/progress.gif">
+            <div id="loading" style="display: none;">
+                正在下载
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- home menu -->
+    <div id="home" style="display: none;">
+        <div id="login">用户登录</div>
+        <div id="star" class="1">单人游戏</div>
+        <div id="star2" class="2">多人游戏</div>
+        <div id="help">玩家玩法</div>
+        <div id="option">玩家排行榜</div>
+        <div id="exit">退出游戏</div>
+    </div>
+    <!-- help content -->
+    <div id="helpCont" style="display: none;">
+        <div class="back">点击返回</div>
+    </div>
+    <!-- game parameters -->
+    <!-- <div id="optionWin" style="display: none;">
+        <div id="sound">
+            <div class="mButton" id="mButton"></div>
+            <div class="meButton"></div>
+        </div>
+        <div id="scene">
+            <div class="lawn"></div>
+            <div class="snowfield"></div>
+            <div class="sandlot"></div>
+            <div class="random"></div>
+        </div>
+        <div class="confirm"></div>
+        <div class="cancel"></div>
+    </div> -->
+    <!-- level window -->
+    <div id="levelWin" style="display: none;">
+        <div class="level_1" style="display: none;">
+            <div class="iss"><span class="levelnum">第1关</span></div>
+        </div>
+        <div class="level_2" style="display: none;">
+            <div class="iss"><span class="levelnum">第2关</span></div>
+        </div>
+        <div class="level_3" style="display: none;">
+            <div class="iss"><span class="levelnum">第3关</span></div>
+        </div>
+        <div class="level_4" style="display: none;">
+            <div class="iss"><span class="levelnum">第4关</span></div>
+        </div>
+    </div>
+    <!-- here starts tank game! -->
+    <div id="startGame" style="display: none;">
+        <div id="container"></div>
+        <!-- nums and exit button -->
+        <div id="related" style="display: none;">
+            <div id="nums">
+                <div id="tc_enemyR"></div>
+                <div id="tc_enemyB"></div>
+                <div id="tc_enemyY"></div>
+                <div id="tc_enemyG"></div>
+            </div>
+            <div id="score">
+                <div id="tc_p1"></div>
+                <div id="score_p1"></div>
+                <div id="tc_p2"></div>
+                <div id="score_p2"></div>
+            </div>
+            <div id="round"></div>
+            <div id="level">
+                <div id="ln">
+                </div>
+            </div>
+            <!-- info menu on click or 'esc' -->
+            <div id="gameMenu" style="position: relative;">
+                <div id="goHome"></div>
+                <div id="info" style="display: none;">
+                    <div id="goMenu">
+                        <div class="select"></div>
+                    </div>
+                    <div id="continue">
+                        <div class="select"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- game over~ -->
+    <div id="gameover" style="display: none;">
+        <div id="wOrl"></div>
+        <div id="p1Score">
+            <div id="p1r"></div>
+            <div id="p1b"></div>
+            <div id="p1y"></div>
+            <div id="p1g"></div>
+        </div>
+        <div id="p2Score">
+            <div id="p2r"></div>
+            <div id="p2b"></div>
+            <div id="p2y"></div>
+            <div id="p2g"></div>
+        </div>
+        <div id="p1Ttl"></div>
+        <div id="p2Ttl"></div>
+        <div id="anyKey"></div>
+    </div>
+    <div class="login">
+        <div class="close"></div>
+        <div class="register-content">
+            <span class="name">用户注册</span>
+            <input type="text" placeholder="请输入用户名...">
+            <input type="text" type="password" placeholder="请输入密码...">
+            <input type="text" type="password" placeholder="请确认密码...">
+            <span class="to-login">已有账号？<a href="javascript:;">点击登录</a></span>
+            <span class="register">立即注册</span>
+        </div>
+        <div class="login-content">
+            <span class="name">用户登录</span>
+            <input type="text" placeholder="请输入用户名...">
+            <input type="text" type="password" placeholder="请输入密码...">
+            <span class="to-register">没有账号？<a href="javascript:;">点击注册</a></span>
+            <span class="register">立即登录</span>
+        </div>
+    </div>
+    <div class="zhezhao"></div>
+    <div class="ranking">
+        <div class="close"></div>
+        <span class="desc">玩家排行榜</span>
+        <table>
+            <tr>
+                <th>排名</th>
+                <th>用户名</th>
+                <th>分数</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>林诗诗</td>
+                <td>378000</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>陈锴洁</td>
+                <td>378000</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>李冬敏</td>
+                <td>378000</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>郑景瑶</td>
+                <td>378000</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>郑玉诗</td>
+                <td>10</td>
+            </tr>
+        </table>
+        <span class="your">您的当前排名：158</span>
+    </div>
+</body>
+<script type="text/javascript" src="js/index.js"></script>
+
+
+</html>
