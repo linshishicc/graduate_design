@@ -4,7 +4,7 @@ const sql = require("../sql/sqlConfig");
 const tokenObj = require('../util/jwt.js');
 // 获取关卡列表
 router.get('/levelList', function(req, res, next) {
-    let option = "select * from round";
+    let option = "select * from round ORDER BY level";
     sql.query(option, function(err, rows) {
         if (err) {
             return res.send({ errCode: -9999, message: '查询失败' + err })
@@ -44,7 +44,7 @@ router.post('/levelAdd', function(req, res, next) {
 router.post('/levelDel', function(req, res, next) {
     let id = req.body.id;
     let option = "delete from round where id=" + id;
-    console.log(option)
+    // console.log(option)
     sql.query(option, function(err, rows) {
         if (err) {
             return res.send({ errCode: -9999, message: '删除失败' + err, status: 0 })

@@ -38,7 +38,7 @@
           <template slot-scope="scope">
             <el-button
               size="mini"
-              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              @click="handleEdit(scope.row)">编辑</el-button>
             <el-button
               size="mini"
               type="danger"
@@ -78,7 +78,8 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="cancelDialog">取 消</el-button>
-        <el-button type="primary" @click="submitRuleItem">确 定</el-button>
+        <el-button type="primary" @click="submitRuleItem" v-if="!editType">确 定</el-button>
+        <el-button type="primary" @click="editRuleItem" v-if="editType">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -102,6 +103,7 @@
           value: '3',
           label: '沙漠'
         }],
+        editType: false
       }
     },
     created() {
@@ -109,68 +111,54 @@
     },
     methods: {
       getRuleList(){
-        let mockData = [
-          {
-            id:1,
-            theme: 1,
-            level: 1,
-            yellow: 2,
-            blue:3,
-            purple:2,
-            bannerPic:require('../assets/images/product-type/road.png'),
-          },
-          {
-            id:2,
-            theme: 1,
-            level: 2,
-            yellow: 2,
-            blue:3,
-            purple:2,
-            bannerPic:require('../assets/images/product-type/road.png'),
-          },
-          {
-            id:3,
-            theme: 1,
-            level: 3,
-            yellow: 2,
-            blue:3,
-            purple:2,
-            bannerPic:require('../assets/images/product-type/road.png'),
-          },
-        ];
+        let mockData = [];
         this.ruleData = mockData;
       },
       //新增
       handleAdd(){
+        this.editType = false
         this.levelForm={};
         this.dialogFormVisible=true
       },
       //编辑
-      handleEdit(index,row){
+      handleEdit(row){
+        this.editType = true
         let levelJson = {
-          purple:row.purple,
-          level:row.level,
-          yellow:row.yellow,
-          blue:row.blue,
+          purple: row.purple,
+          level: row.level,
+          yellow: row.yellow,
+          blue: row.blue,
           theme: row.theme,
-          live: row.live
+          live: row.live,
+          id: row.id
         };
         this.levelForm=levelJson;
         this.dialogFormVisible=true;
       },
       //删除
       handleDelete(index,row){
-        this.$confirm('此操作将删除该条分销商设置记录, 是否继续?', '提示', {
+        this.$confirm('此操作将删除该关卡, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          console.log(row.id);
-          //调删除分销商接口
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
+          //调删除分类接口
+          let id = row.id
+          let param = {id: id}
+          this.$axios.post('/tank/level/levelDel',param).then((res) =>{
+            if(res.data.status == 1) {
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              });
+              this.getData()
+            } else {
+              this.$message({
+                type: 'error',
+                message: res.data.message
+              });
+            }
+          })
         }).catch(() => {
           this.$message({
             type: 'info',
@@ -181,10 +169,71 @@
       //弹窗取消
       cancelDialog(){
         this.$refs.levelForm.resetFields();
-        this.dialogFormVisible=false;
+        this.dialogFormVisible = false;
       },
       submitRuleItem(){
+        if(this.levelForm.level == ''){
+          this.$message({
+            type: 'error',
+            message: '关卡数必须填写'
+          });
+          return;
+        }
+        if(this.levelForm.live == ''){
+          this.$message({
+            type: 'error',
+            message: '玩家生命数必须填写'
+          });
+          return;
+        }
+        this.$axios.post('/tank/level/levelAdd', this.levelForm).then((res) =>{
+          if( res.data.status == 1) {
+            this.$message({
+              type: 'success',
+              message: '添加成功'
+            });
+            this.getData()
+            this.dialogFormVisible = false
+          } else {
+            this.$message({
+              type: 'error',
+              message: res.data.message
+            });
+          }
+        }) 
+      },
+      editRuleItem(){
+        if(this.levelForm.level == ''){
+          this.$message({
+            type: 'error',
+            message: '关卡数必须填写'
+          });
+          return;
+        }
+        if(this.levelForm.live == ''){
+          this.$message({
+            type: 'error',
+            message: '玩家生命数必须填写'
+          });
+          return;
+        }
         console.log(this.levelForm)
+        this.$axios.post('/tank/level/levelUpdate', this.levelForm).then((res) =>{
+          if( res.data.status == 1) {
+            this.$message({
+              type: 'success',
+              message: '修改成功'
+            });
+            this.getData()
+            this.dialogFormVisible = false
+          } else {
+            console.log(res.data.message)
+            this.$message({
+              type: 'error',
+              message: res.data.message
+            });
+          }
+        }) 
       },
       getData() {
         this.$axios.get('/tank/level/levelList').then((res) =>{

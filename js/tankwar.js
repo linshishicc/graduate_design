@@ -12,14 +12,6 @@ var TankWarMng = {
     initMenu: function() {
         TankWarMng.clear();
         $('#home').find('*').show().end().fadeIn('slow');
-        // $('.back, .confirm, .cancel, .level_1, .level_2, .level_3').hover(function() {
-        //     $(this).css('background-position', '25%');
-        // }, function() {
-        //     $(this).css('background-position', '0%');
-        // });
-        // $('.back, .confirm, .cancel, .level_1, .level_2, .level_3').mousedown(function() {
-        //     $(this).css('background-position', '50%');
-        // });
         $('#star,#star2').mouseup(function() {
             TankWar.players.num = $(this).attr('class');
             $('#home > div').hide();
@@ -58,21 +50,27 @@ var TankWarMng = {
         });
         // 点击出现登录页面
         $('#login').click(function() {
-            $('.login').css({ 'height': '320px', 'top': '120px' });
+            $('.login').css({ 'height': '370px', 'top': '120px' });
             $('.login-content').css({ display: 'block' });
             $('.zhezhao').css({ display: 'block' });
         });
         $('.to-login').click(function() {
             $('.login-content').css({ display: 'block' });
             $('.register-content').css({ display: 'none' });
+            $('#verifyCanvas').remove();
+            $('#login-verify').after('<canvas width="80" height="28" id="verifyCanvas"></canvas>')
+            drawCode();
         });
         // 点击出现注册页面
         $('.to-register').click(function() {
             $('.login-content').css({ display: 'none' });
             $('.register-content').css({ display: 'block' });
+            $('#verifyCanvas').remove();
+            $('#reg-verify').after('<canvas width="80" height="28" id="verifyCanvas"></canvas>')
+            drawCode();
         });
         $('.login .close').click(function() {
-            $('.login').css({ 'height': '0', 'top': '-320px' });
+            $('.login').css({ 'height': '0', 'top': '-370px' });
             $('.login-content').css({ display: 'none' });
             $('.register-content').css({ display: 'none' });
             $('.zhezhao').css({ display: 'none' });
@@ -210,9 +208,9 @@ var TankWarMng = {
     },
     clear: function() {
         TankWar.state.exit = true;
-        $(document).unbind();
-        $(window).unbind();
-        $('*').unbind();
+        // $(document).unbind();
+        // $(window).unbind();
+        // $('*').unbind();
         $('#container *').remove();
         $('#related').hide();
         $('#tc_p1, #tc_p2, #score_p1, #score_p2, #tc_enemyR, #tc_enemyB, #tc_enemyY, #tc_enemyG').html('');

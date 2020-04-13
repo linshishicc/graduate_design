@@ -37,10 +37,20 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-dialog title="添加管理员" :visible.sync="dialogFormVisible">
+    <el-dialog :title="editType ? '编辑信息':'添加管理员'" :visible.sync="dialogFormVisible">
       <el-form :model="form">
         <el-form-item label="id" :label-width="formLabelWidth">
           <el-input v-model="form.id" autocomplete="off" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="管理组" :label-width="formLabelWidth" v-if="currentGroup == 1">
+           <el-select v-model="form.group" placeholder="请选择">
+            <el-option
+              v-for="item in manageGroup"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="用户名" :label-width="formLabelWidth">
           <el-input v-model="form.username" autocomplete="off" :disabled="editType"></el-input>
@@ -77,7 +87,17 @@
         },
         dialogFormVisible:false,
         formLabelWidth: '120px',
-        editType: true
+        editType: true,
+        manageGroup: [
+          {
+          value: 1,
+          label: '超级管理员'
+          }, {
+            value: 2,
+            label: '管理员'
+          }
+        ],
+        currentGroup: localStorage.getItem("group")
       }
     },
     methods: {
@@ -110,6 +130,7 @@
         this.editType = true
         this.form = {
           username:row.username,
+          group: row.group,
           password:'',
           id:row.id,
           conPassword: ''
@@ -176,7 +197,7 @@
           });
           return;
         }
-        let param = {username: this.form.username,password: this.form.password}
+        let param = {username: this.form.username,password: this.form.password,group:this.form.group}
         this.$axios.post('/tank/users/managerAdd', param).then((res) =>{
           if( res.data.status == 1) {
             this.$message({
@@ -203,9 +224,9 @@
         this.$axios.get('/tank/users/managerList').then((res) =>{
         res.data.data.forEach((item,i) => {
           if(item.begroup == 1){
-            item.group = '超级管理员'
+            item.group = 1
           } else {
-            item.group = '管理员'
+            item.group = 2
           }
           item.logintime = this.timeTrs(item.logintime)
         });
@@ -213,13 +234,13 @@
         }) 
       },
       editData() {
-        if(this.form.password.length < 6 || this.form.password.length > 16){
-          this.$message({
-            type: 'error',
-            message: '密码长度必须在6~16个字符之间'
-          });
-          return;
-        }
+        // if(this.form.password.length < 6 || this.form.password.length > 16){
+        //   this.$message({
+        //     type: 'error',
+        //     message: '密码长度必须在6~16个字符之间'
+        //   });
+        //   return;
+        // }
         if(this.form.password !== this.form.conPassword){
           this.$message({
             type: 'error',
@@ -227,7 +248,7 @@
           });
           return;
         }
-        let param = {id: this.form.id,password: this.form.password}
+        let param = {id: this.form.id,password: this.form.password,group:this.form.group}
         this.$axios.post('/tank/users/managerEdit', param).then((res) =>{
           if( res.data.status == 1) {
             this.$message({
