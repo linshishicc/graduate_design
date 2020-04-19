@@ -158,7 +158,8 @@ body {
 #p1Ttl,
 #p2Ttl,
 #anyKey,
-#login {
+#login,
+#player {
     position: absolute;
 }
 
@@ -179,8 +180,9 @@ body {
 #help,
 #exit,
 #option,
-#login {
-    background: #989898;
+#login,
+#player {
+    background-color: #989898;
     color: #fff;
     font-size: 22px;
     height: 36px;
@@ -188,7 +190,7 @@ body {
     top: 200px;
     left: 430px;
     cursor: pointer;
-    border: 2px solid #000;
+    /* border: 1px solid #000; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -205,8 +207,24 @@ body {
     border: 2px solid #fff;
 }
 
-#login {
+#login,
+#player {
     top: 150px;
+}
+
+#player {
+    font-size: 16px;
+    z-index: -1;
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid #989898;
+    border-radius: 3px;
+    cursor: auto;
+}
+
+#player img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
 }
 
 #star2 {
@@ -244,12 +262,13 @@ body {
     background: #606060;
     height: 35px;
     width: 120px;
-    top: 549px;
-    left: 639px;
+    top: 640px;
+    left: 820px;
     color: #fff;
     font-size: 20px;
     text-align: center;
     line-height: 35px;
+    cursor: pointer;
 }
 
 .mButton,
@@ -492,28 +511,28 @@ body {
 #wOrl {
     height: 30px;
     width: 117px;
-    top: 205px;
-    left: 360px;
+    top: 240px;
+    left: 440px;
 }
 
 #p1r {
-    top: 295px;
-    left: 274px;
+    top: 335px;
+    left: 330px;
 }
 
 #p1b {
-    top: 337px;
-    left: 274px;
+    top: 380px;
+    left: 330px;
 }
 
 #p1y {
-    top: 379px;
-    left: 274px;
+    top: 425px;
+    left: 330px;
 }
 
 #p1g {
-    top: 424px;
-    left: 274px;
+    top: 485px;
+    left: 330px;
 }
 
 #p2r {
@@ -537,8 +556,8 @@ body {
 }
 
 #p1Ttl {
-    top: 486px;
-    left: 289px;
+    top: 550px;
+    left: 380px;
 }
 
 #p2Ttl {
@@ -549,8 +568,8 @@ body {
 #anyKey {
     height: 22px;
     width: 132px;
-    top: 562px;
-    left: 360px;
+    top: 640px;
+    left: 420px;
 }
 
 .presscontinue {
@@ -667,8 +686,8 @@ input::-webkit-input-placeholder {
     background-color: rgba(0, 0, 0, 0.9);
     z-index: 100;
     position: absolute;
-    top: 110px;
-    left: 150px;
+    top: 160px;
+    left: 250px;
     text-align: center;
     color: #cca25a;
     display: none;

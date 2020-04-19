@@ -14,8 +14,8 @@ var TankWar = {
         p1: {
             lives: config.player1_lives,
             pos: {
-                x: 242,
-                y: 510
+                x: 340,
+                y: 590
             },
             speed: config.player1_speed,
             keys: {
@@ -26,8 +26,8 @@ var TankWar = {
         p2: {
             lives: config.player2_lives,
             pos: {
-                x: 420,
-                y: 510
+                x: 520,
+                y: 590
             },
             speed: config.player2_speed,
             keys: {

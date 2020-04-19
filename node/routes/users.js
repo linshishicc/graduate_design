@@ -59,7 +59,6 @@ router.post('/managerAdd', function(req, res, next) {
     let md5 = crypto.createHash("md5");
     let newPas = md5.update(password).digest("hex");
     let time = moment(new Date()).format('YYYYMMDDHHmm')
-        // let option = "insert into admin  (username, password) VALUES (值1, 值2,....);
     let option = `insert into admin  (username, password,begroup,logintime) VALUES ("${username}", "${newPas}","${group}","${time}")`
     let select = `select * from admin where username = "${username}"`
     sql.query(select, function(err, rows) {
@@ -88,7 +87,6 @@ router.post('/managerEdit', function(req, res, next) {
     } else {
         option = `UPDATE admin SET password = "${newPas}", brgroup = "${group}" WHERE id = ${id}`
     }
-    console.log(option)
     sql.query(option, function(err, rows) {
         if (err) {
             return res.send({ errCode: -9999, message: '修改失败' + err })

@@ -516,8 +516,8 @@ PubMother.prototype = {
     explode: function(map, n) {
         var i = 1,
             $bomb = $('#' + this.id),
-            top = $bomb.offset().top - 30,
-            left = $bomb.offset().left - 35,
+            top = $bomb.offset().top - 140,
+            left = $bomb.offset().left - 500,
             timr = setInterval(function() {
                 $bomb.css({
                     'background': 'url(images/' + map + '/' + i + '.png) 50% 50% no-repeat',

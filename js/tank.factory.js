@@ -6,8 +6,10 @@ var TankWarFactory = {
         TankWarMng.setTankCount(tank.id, --tank.lives);
         TankWarMng.setScore(tank, 0);
     },
+    /**
+     * 创建敌军坦克
+     */
     createEnemyTank: (function() {
-        // Private static check type of enemies.
         function checkType(type) {
             var types = TankWar.enemies.types.clone();
             if (!type) type = 'r';
@@ -25,6 +27,7 @@ var TankWarFactory = {
         return function(type) {
             var tank;
             type = checkType(type);
+            console.log(type)
             if (!type) throw new Error('No enemies alive.');
             switch (type) {
                 case 'r':

@@ -5,7 +5,7 @@ var nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", 'A', 'B', 'C', 'D'
     'y', 'z'
 ];
 var colors = []
-drawCode();
+    // drawCode();
 var rands = [];
 // 绘制验证码
 function drawCode() {
@@ -31,7 +31,6 @@ function drawCode() {
         context.fillText(rand[i], x[i], y[i]);
     }
     rands = rand
-        // console.log(rand);
         //画3条随机线
     for (var i = 0; i < 3; i++) {
         drawline(canvas, context);
@@ -80,7 +79,7 @@ function convertCanvasToImage(canvas) {
     image2.src = canvas.toDataURL("image/png")
     return image;
 }
-
+drawCode();
 // 点击图片刷新
 document.getElementById('code_img1').onclick = function() {
     $('#verifyCanvas').remove();

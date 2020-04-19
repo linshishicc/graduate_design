@@ -45,6 +45,9 @@
     <!-- home menu -->
     <div id="home" style="display: none;">
         <div id="login">用户登录</div>
+        <div id="player">
+            <img src="./images/player.png" alt=""> 玩家登录
+        </div>
         <div id="star" class="1">单人游戏</div>
         <div id="star2" class="2">多人游戏</div>
         <div id="help">玩家玩法</div>
@@ -157,15 +160,14 @@
         </div>
         <div class="login-content">
             <span class="name">用户登录</span>
-            <input type="text" placeholder="请输入用户名...">
-            <input type="text" type="password" placeholder="请输入密码...">
+            <input type="text" placeholder="请输入用户名..." id="log-username">
+            <input type="password" placeholder="请输入密码..." id="log-password">
             <p>
                 <input type="text" class="topAlign" id="login-verify" placeholder="请输入验证码" name="verify" required>
-                <!-- <canvas width="80" height="28" id="verifyCanvas"></canvas> -->
                 <img id="code_img2">
             </p>
             <span class="to-register">没有账号？<a href="javascript:;">点击注册</a></span>
-            <span class="register">立即登录</span>
+            <span class="register" id="submitLogin">立即登录</span>
         </div>
     </div>
     <div class="zhezhao"></div>
