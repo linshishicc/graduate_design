@@ -60,7 +60,8 @@ router.post('/levelUpdate', function(req, res, next) {
     let yellow = req.body.yellow;
     let blue = req.body.blue;
     let live = req.body.live;
-    let option = `UPDATE round SET theme = "${theme}",purple = "${purple}",yellow = "${yellow}",blue="${blue}",live="${live}" WHERE id = ${id}`
+    let deepblue = req.body.deepblue;
+    let option = `UPDATE round SET theme = "${theme}",purple = "${purple}",yellow = "${yellow}",blue="${blue}",live="${live}",deepblue="${deepblue}" WHERE id = ${id}`
     sql.query(option, function(err, rows) {
         if (err) {
             return res.send({ errCode: -9999, message: '修改失败' + err })
@@ -69,4 +70,14 @@ router.post('/levelUpdate', function(req, res, next) {
         }
     })
 });
+// router.get('/getLevel', function(req, res, next) {
+//     let option = "select * from round ORDER BY level";
+//     sql.query(option, function(err, rows) {
+//         if (err) {
+//             return res.send({ errCode: -9999, message: '查询失败' + err })
+//         } else {
+//             res.send({ errCode: 0, message: '查询成功', data: rows });
+//         }
+//     })
+// });
 module.exports = router;

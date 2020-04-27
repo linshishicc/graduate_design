@@ -27,7 +27,7 @@ var TankWarFactory = {
         return function(type) {
             var tank;
             type = checkType(type);
-            console.log(type)
+            // console.log(type)
             if (!type) throw new Error('No enemies alive.');
             switch (type) {
                 case 'r':

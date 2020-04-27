@@ -5,7 +5,6 @@ import Index from "@/components/Index";
 import Welcome from "@/components/Welcome";
 import Manager from "@/components/Manager";
 import UserManager from "@/components/UserManager";
-import ProductList from "@/components/ProductList";
 import Ranking from "@/components/Ranking";
 import Rule from "@/components/Rule";
 import CommissionList from "@/components/CommissionList";
@@ -28,7 +27,7 @@ export default new Router({
                 { path: '/', component: Welcome },
                 { path: '/manager', component: Manager },
                 { path: '/user-manager', component: UserManager },
-                { path: '/product-list', component: ProductList },
+                // { path: '/product-list', component: ProductList },
                 { path: '/ranking', component: Ranking },
                 { path: '/rule', component: Rule },
                 { path: '/commission-list', component: CommissionList },

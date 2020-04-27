@@ -9,6 +9,7 @@ var loginRouter = require('./routes/login');
 var productRouter = require('./routes/product');
 var imagesRouter = require('./routes/images');
 var levelRouter = require('./routes/level');
+var scoreRouter = require('./routes/score');
 var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -44,6 +45,7 @@ app.use('/tank/login', loginRouter);
 app.use('/tank/product', productRouter);
 app.use('/tank/images', imagesRouter);
 app.use('/tank/level', levelRouter);
+app.use('/tank/score', scoreRouter);
 app.use(function(req, res, next) {
     next(createError(404));
 });

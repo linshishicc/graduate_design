@@ -1,9 +1,10 @@
 var TankWar = {
     param: {
         level: 1,
-        enemyNumOfLevel: config.enemy_number_of_level,
+        enemyNumOfLevel: '',
         playerDeadNum: 0,
-        scene: config.default_scene
+        scene: 'snowfield',
+        total_score: 0
     },
     state: {
         exit: false,
@@ -12,27 +13,27 @@ var TankWar = {
     players: {
         num: 1,
         p1: {
-            lives: config.player1_lives,
+            lives: 10,
             pos: {
                 x: 340,
                 y: 590
             },
-            speed: config.player1_speed,
+            speed: 2,
             keys: {
-                moveKeys: config.player1_move_keys,
-                fireKey: config.player1_fire_key
+                moveKeys: { 37: 'left', 38: 'up', 39: 'right', 40: 'down' },
+                fireKey: 32
             }
         },
         p2: {
-            lives: config.player2_lives,
+            lives: 10,
             pos: {
                 x: 520,
                 y: 590
             },
-            speed: config.player2_speed,
+            speed: 2,
             keys: {
-                moveKeys: config.player2_move_keys,
-                fireKey: config.player2_fire_key
+                moveKeys: { 65: 'left', 87: 'up', 68: 'right', 83: 'down' },
+                fireKey: 71
             }
         }
     },
@@ -41,23 +42,23 @@ var TankWar = {
         posBorn: [],
         r: {
             leftNum: 0,
-            speed: config.enemy_red_speed
+            speed: 1
         },
         b: {
             leftNum: 0,
-            speed: config.enemy_blue_speed
+            speed: 1.5
         },
         y: {
             leftNum: 0,
-            speed: config.enemy_yellow_speed
+            speed: 2
         },
         g: {
             leftNum: 0,
-            speed: config.enemy_green_speed
+            speed: 2.5
         }
     },
     bullets: {
-        speed: config.bullet_speed
+        speed: 30
     },
     barrier: { // 运行时容器，由于面向接口，可以统一调用接口方法，如 xx[i].isShot()
         players: [],
@@ -77,8 +78,8 @@ var TankWar = {
         p_bg_pos: [{ p: '0%', w: 15 }, { p: '12%', w: 14 }, { p: '22.2%', w: 15 }, { p: '33.3%', w: 14 }, { p: '44.4%', w: 14 }, { p: '55.5%', w: 14 }, { p: '66.6%', w: 14 }, { p: '77.7%', w: 14 }, { p: '88.5%', w: 14 }, { p: '99.9%', w: 15 }],
         l_bg_pos: [{ p: '0%', w: 19 }, { p: '12%', w: 17 }, { p: '22.2%', w: 19 }, { p: '33.3%', w: 18 }, { p: '44.4%', w: 18 }, { p: '55.5%', w: 18 }, { p: '66.6%', w: 18 }, { p: '77.7%', w: 18 }, { p: '88.5%', w: 18 }, { p: '99.9%', w: 19 }]
     },
-    developModel: config.develop_model,
-    mySite: config.my_site,
+    developModel: 'product',
+    mySite: '',
     maps: [],
     resources: { // 需要预加载的图片和地图
         'images': {

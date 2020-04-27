@@ -204,7 +204,7 @@ body {
 #login:hover {
     background: #000;
     color: yellow;
-    border: 2px solid #fff;
+    /* border: 2px solid #fff; */
 }
 
 #login,
@@ -710,7 +710,7 @@ input::-webkit-input-placeholder {
     height: 40px;
 }
 
-.ranking .close {
+.ranking .rank-close {
     width: 35px;
     height: 35px;
     background: url('../images/close.png');

@@ -3,6 +3,7 @@ const tokenObj = require('../util/jwt.js');
 const express = require('express');
 const crypto = require("crypto");
 const moment = require("moment")
+const pagination = require('../util/page');
 let router = express.Router();
 router.post('/usersAdd', function(req, res, next) {
     let username = req.body.username;
@@ -92,6 +93,25 @@ router.post('/managerEdit', function(req, res, next) {
             return res.send({ errCode: -9999, message: '修改失败' + err })
         } else {
             res.send({ errCode: 0, message: '修改成功', status: 1 });
+        }
+    })
+});
+router.get('/userList', function(req, res, next) {
+    let option = "select * from user limit ";
+    let countPageSql = `select count(id) as total from user`;
+    let page = req.query.page;
+    pagination(countPageSql, page, option, function(result) {
+        return res.send(result)
+    });
+});
+router.post('/userDel', function(req, res, next) {
+    let id = req.body.id;
+    let option = "delete from user where id=" + id;
+    sql.query(option, function(err, rows) {
+        if (err) {
+            return res.send({ errCode: -9999, message: '删除失败' + err, status: 0 })
+        } else {
+            res.send({ errCode: 0, message: '删除成功', status: 1 });
         }
     })
 });

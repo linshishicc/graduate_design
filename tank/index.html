@@ -6,9 +6,10 @@
     <link href="images/tank.ico" rel="shortcut icon">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="css/tank.css">
-    <script type="text/javascript" src="js/util.js"></script>
     <script type="text/javascript" src="js/tank.config.js"></script>
     <script type="text/javascript" src="js/tank.namespace.js"></script>
+    <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/util.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/tank.progress.js"></script>
@@ -16,11 +17,11 @@
     <script type="text/javascript" src="js/tank.factory.js"></script>
     <script type="text/javascript" src="js/tankwar.js"></script>
     <script type="text/javascript" src="js/layer.js"></script>
-    <script type="text/javascript" src="js/api.js"></script>
+
     <script>
         $(function() {
             TankWarMng.init();
-            getAllApi.init()
+            getAllApi.init();
         });
     </script>
 </head>
@@ -172,9 +173,9 @@
     </div>
     <div class="zhezhao"></div>
     <div class="ranking">
-        <div class="close"></div>
+        <div class="rank-close"></div>
         <span class="desc">玩家排行榜</span>
-        <table>
+        <table id="rank-table">
             <tr>
                 <th>排名</th>
                 <th>用户名</th>
@@ -206,7 +207,7 @@
                 <td>10</td>
             </tr>
         </table>
-        <span class="your">您的当前排名：158</span>
+        <span class="your" id="your">您的当前排名：158，分数：</span>
     </div>
 </body>
 <!-- <script type="text/javascript" src="js/index.js"></script> -->

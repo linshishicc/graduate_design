@@ -32,10 +32,10 @@ var TankWarMng = {
                 $('#home').fadeIn('fast');
             });
         });
-        $('#option').mouseup(function() {
-            $('#optionWin').animate({ height: 403, width: 319, top: 190, left: 487 }, '1000').find('*').show();
-            $('#optionWin #scene > div.' + TankWar.param.scene).siblings().removeClass('checked').end().addClass('checked');
-        });
+        // $('#option').mouseup(function() {
+        //     $('#optionWin').animate({ height: 403, width: 319, top: 190, left: 487 }, '1000').find('*').show();
+        //     $('#optionWin #scene > div.' + TankWar.param.scene).siblings().removeClass('checked').end().addClass('checked');
+        // });
         $('#optionWin #scene > div').click(function() {
             $(this).siblings().removeClass('checked').end().addClass('checked');
         });
@@ -79,13 +79,14 @@ var TankWarMng = {
             $('.zhezhao').css({ display: 'none' });
             getAllApi.clearMessage()
         });
-        $('.ranking .close').click(function() {
+        $('.ranking .rank-close').click(function() {
             $('.ranking').css({ display: 'none' });
         });
         $('#option').click(function() {
             if (!sessionStorage.getItem('username')) {
                 layer.msg('您还没登录，暂时无法查看排行榜信息。', { icon: 3 });
             } else {
+                getAllApi.getRank()
                 $('.ranking').css({ display: 'block' });
             }
         });
@@ -180,24 +181,24 @@ var TankWarMng = {
         $('#goMenu, #continue').mouseup(function() {
             processInfo();
         });
-        $(document).keydown(function(e) {
-            e = e || window.event;
-            var key = e.which || e.keyCode;
-            switch (key) {
-                case 27:
-                    showInfo('goMenu');
-                    break;
-                case 38:
-                    if ($('#info:visible').length == 1) $('#info .select').toggleClass('selected');
-                    break;
-                case 40:
-                    if ($('#info:visible').length == 1) $('#info .select').toggleClass('selected');
-                    break;
-                case 13:
-                    if ($('#info:visible').length == 1) processInfo();
-                    break;
-            }
-        });
+        // $(document).keydown(function(e) {
+        //     e = e || window.event;
+        //     var key = e.which || e.keyCode;
+        //     switch (key) {
+        //         case 27:
+        //             showInfo('goMenu');
+        //             break;
+        //         case 38:
+        //             if ($('#info:visible').length == 1) $('#info .select').toggleClass('selected');
+        //             break;
+        //         case 40:
+        //             if ($('#info:visible').length == 1) $('#info .select').toggleClass('selected');
+        //             break;
+        //         case 13:
+        //             if ($('#info:visible').length == 1) processInfo();
+        //             break;
+        //     }
+        // });
         // info menu shows on blur
         $(window).blur(function() {
             if (document.activeElement == document.body)
@@ -205,11 +206,12 @@ var TankWarMng = {
         });
     },
     backToMenu: function() {
-        TankWarMng.clear();
-        $('#startGame').slideUp();
-        $('#home').slideDown(function() {
-            TankWarMng.initMenu();
-        });
+        location.reload()
+            // TankWarMng.clear();
+            // $('#startGame').slideUp();
+            // $('#home').slideDown(function() {
+            //     TankWarMng.initMenu();
+            // });
 
     },
     clear: function() {
@@ -333,8 +335,7 @@ var TankWarMng = {
             _i = _n.charAt(i);
             _p = TankWar.util.l_bg_pos[_i].p;
             _w = TankWar.util.l_bg_pos[_i].w;
-            $('<div></div>')
-                .css({
+            $('<div></div>').css({
                     'float': 'left',
                     'background': 'url(images/totalnum.png) ' + _p + ' no-repeat',
                     'height': '30px',
@@ -374,8 +375,7 @@ var TankWarMng = {
                 TankWarMng.setScore(n.id + m, n.kills[m] * TankWar.util.type_score[m]);
             });
             TankWarMng.setScore(n.id + 'Ttl', TankWarMng.getScore(n));
-            config.total_score += TankWarMng.getScore(n)
-            console.log(config.total_score)
+            TankWar.param.total_score += TankWarMng.getScore(n)
         });
         TankWarMng.clear();
         $('#startGame').slideUp();
@@ -389,9 +389,19 @@ var TankWarMng = {
                 clearInterval(timr);
                 $('#gameover *').hide();
                 if (result === 'win' && TankWar.param.level++ !== 4) {
+                    TankWar.players.p1.lives = TankWar.players.p2.lives = TankWar.param.enemyNumOfLevel[TankWar.param.level - 1].live
+                    TankWar.param.scene = TankWar.param.enemyNumOfLevel[TankWar.param.level - 1].theme
                     $('#gameover').fadeOut(TankWarMng.initGame);
                 } else {
-                    $('#gameover').fadeOut(TankWarMng.initMenu);
+                    if (sessionStorage.getItem('username')) {
+                        let param = { score: TankWar.param.total_score, level: TankWar.param.level - 1 }
+                        getAllApi.updateScore(param)
+                        TankWar.param.total_score = 0
+                    }
+                    // $('#gameover').fadeOut(TankWarMng.initMenu);
+                    setTimeout(() => {
+                        history.go(0)
+                    }, 2000)
                 }
             });
         });
