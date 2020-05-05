@@ -3,7 +3,7 @@
         <div class="content">
             <div class="title">玩家排行榜</div>
             <el-table :data="popularList" stripe border>
-                <el-table-column prop="userName" label="玩家名" align="center"></el-table-column>
+                <el-table-column prop="username" label="玩家名" align="center"></el-table-column>
                 <el-table-column prop="score" label="分数" align="center"></el-table-column>
                 <el-table-column
                     prop="ranking"
@@ -12,8 +12,7 @@
                     width="200"
                     :show-overflow-tooltip="true"
                 ></el-table-column>
-
-                <el-table-column prop="time" label="记录时间" align="center"></el-table-column>
+                <!-- <el-table-column prop="time" label="记录时间" align="center"></el-table-column> -->
                 <el-table-column label="操作">
                     <template slot-scope="scope">
                         <el-button
@@ -24,6 +23,16 @@
                     </template>
                 </el-table-column>
             </el-table>
+            <div class="pagination">
+                <el-pagination
+                    background
+                    layout="prev, pager, next, jumper"
+                    :page-size="pageSize"
+                    @current-change="pageChange"
+                    :current-page="currentPage"
+                    :total="this.total"
+                ></el-pagination>
+            </div>
         </div>
     </div>
 </template>
@@ -33,14 +42,32 @@ export default {
     name: 'Popular',
     data () {
         return {
+            total: 0, // 列表数据总数
+            currentPage: 1, // 当前分页
+            pageSize: 10, // 分页数
             search: '',
-            popularList: []
+            popularList: [],
+            allData: []
         };
     },
     created () {
         this.getPopularList();
     },
     methods: {
+        /**
+         * 分页变化
+         */
+        pageChange (cur) {
+            this.currentPage = cur;
+            this.popularList = []
+            this.allData.forEach((item, i) => {
+                // console.log((this.currentPage - 1) * this.pageSize)
+                // console.log(this.currentPage * this.pageSize)
+                if ((this.currentPage - 1) * this.pageSize <= i && i < this.currentPage * this.pageSize) {
+                    this.popularList.push(item)
+                }
+            })
+        },
         submitSearch () {
             console.log(this.search);
             // 调查询接口
@@ -55,34 +82,19 @@ export default {
             this.dialogFormVisible = true;
             this.form = typeJson;
         },
-        getPopularList () {
-            let mockdata = [
-                {
-                    ranking: 1,
-                    userName: '奶茶',
-                    score: 17,
-                    time: 202010180252
-                },
-                {
-                    ranking: 1,
-                    userName: '奶茶',
-                    score: 17,
-                    time: 202010180252
-                },
-                {
-                    ranking: 1,
-                    userName: '奶茶',
-                    score: 17,
-                    time: 202010180252
-                }
-            ];
-            this.popularList = mockdata.map((val, index, array) => {
-                return {
-                    ranking: `第${val.ranking}名`,
-                    userName: val.userName,
-                    score: val.score,
-                    time: val.time
-                };
+        /**
+         * 获取用户数据
+         */
+        getData () {
+            this.$axios.get('/tank/score/allRanking').then(res => {
+                this.allData = res.data.data.rows;
+                this.allData.forEach((item, i) => {
+                    item.ranking = `第${i + 1}名`
+                    if (i < this.pageSize) {
+                        this.popularList.push(item)
+                    }
+                })
+                this.total = res.data.data.rows.length
             });
         },
         handleDelete (index, row) {
@@ -108,6 +120,9 @@ export default {
                     });
                 });
         }
+    },
+    mounted () {
+        this.getData()
     }
 };
 </script>
@@ -127,6 +142,11 @@ export default {
                 width: 300px;
                 margin-right: 10px;
             }
+        }
+        .pagination{
+            width: 100%;
+            margin-top: 50px;
+            text-align: center;
         }
     }
 }

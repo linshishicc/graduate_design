@@ -307,10 +307,13 @@ var TankWarMng = {
         }
         return score;
     },
+    /**
+     * 计算坦克剩余生命数
+     */
     setTankCount: function(pid, n) {
-        var $tankcount = $('#tc_' + pid.split('_')[0]),
-            _n = n + '',
-            _p, _w, _i;
+        var $tankcount = $('#tc_' + pid.split('_')[0]);
+        var _n = n + '';
+        var _p, _w, _i;
         $tankcount.html('');
         for (var i = 0, len = _n.length; i < _n.length; i++) {
             _i = _n.charAt(i);

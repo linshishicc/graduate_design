@@ -115,4 +115,24 @@ router.post('/userDel', function(req, res, next) {
         }
     })
 });
+// router.post('/userUpdate', function(req, res, next) {
+//     let id = req.body.id;
+//     let password = req.body.password;
+//     let group = req.body.group;
+//     let md5 = crypto.createHash("md5");
+//     let newPas = md5.update(password).digest("hex");
+//     let option
+//     if (password.length == 0) {
+//         option = `UPDATE admin SET begroup = "${group}" WHERE id = ${id}`
+//     } else {
+//         option = `UPDATE admin SET password = "${newPas}", brgroup = "${group}" WHERE id = ${id}`
+//     }
+//     sql.query(option, function(err, rows) {
+//         if (err) {
+//             return res.send({ errCode: -9999, message: '修改失败' + err })
+//         } else {
+//             res.send({ errCode: 0, message: '修改成功', status: 1 });
+//         }
+//     })
+// });
 module.exports = router;

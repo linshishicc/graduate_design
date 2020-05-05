@@ -1,11 +1,9 @@
 // Interfaces.
-
 var Tank = new Interface('Tank', ['explode', 'clear', 'die', 'fire', 'isShot', 'move', 'stopMoving', 'isBlocked', 'attachEvents', 'init']);
 var Bullet = new Interface('Bullet', ['explode', 'clear', 'die', 'fire', 'init']);
 var Block = new Interface('Block', ['explode', 'clear', 'die', 'isShot', 'display']);
 
-// Abstract tank, impl base methods.
-var AbstractTank = function(opt) { // Constructor
+var AbstractTank = function(opt) { // 坦克对象参数配置
     this.id = opt.id;
     this.isAlive = true;
     this.speed = opt.speed;
@@ -17,7 +15,8 @@ var AbstractTank = function(opt) { // Constructor
     this.attachEvents();
 };
 
-AbstractTank.prototype = { // Public methods
+AbstractTank.prototype = { //公共方法，使用原型的方式
+    // 移动方法
     move: function(_d) {
         if (!this.isAlive || !_d || TankWar.state.exit || TankWar.state.pause) {
             return this;
@@ -27,7 +26,7 @@ AbstractTank.prototype = { // Public methods
             that = this,
             dir = TankWar.util.direction[_d],
             pos = parseInt(this[dir]);
-        if (thisTank.hasClass('moving' + _d)) { // Avoid rebinding
+        if (thisTank.hasClass('moving' + _d)) { // 避免重新绑定
             return this;
         } else {
             this.stopMoving();
@@ -62,13 +61,13 @@ AbstractTank.prototype = { // Public methods
                         if (_l + 31 > barriers[i].left && _l - 31 < barriers[i].left && _t + 30 > barriers[i].top && _t - 36 < barriers[i].top || _t < 10) return true;
                         break;
                     case 'down':
-                        if (_l + 31 > barriers[i].left && _l - 31 < barriers[i].left && _t + 36 > barriers[i].top && _t - 31 < barriers[i].top || _t > 510) return true;
+                        if (_l + 31 > barriers[i].left && _l - 31 < barriers[i].left && _t + 36 > barriers[i].top && _t - 31 < barriers[i].top || _t > 580) return true;
                         break;
                     case 'left':
                         if (_l + 31 > barriers[i].left && _l - 36 < barriers[i].left && _t + 31 > barriers[i].top && _t - 31 < barriers[i].top || _l < 10) return true;
                         break;
                     case 'right':
-                        if (_l + 36 > barriers[i].left && _l - 31 < barriers[i].left && _t + 31 > barriers[i].top && _t - 31 < barriers[i].top || _l > 650) return true;
+                        if (_l + 36 > barriers[i].left && _l - 31 < barriers[i].left && _t + 31 > barriers[i].top && _t - 31 < barriers[i].top || _l > 800) return true;
                         break;
                 }
             }
@@ -167,7 +166,6 @@ PlayerTank.prototype.reborn = function() {
 };
 
 var EnemyTank = (function() {
-    // Private static methods.
     function checkInitData() {
         if (TankWar.enemies.posBorn.length < 1) {
             throw new Error('TankWar map is not loaded.');
@@ -334,7 +332,7 @@ BulletClass.prototype = {
                                 if (_l + 20 > barriers[i].left && _l - 20 < barriers[i].left && _t + 25 > barriers[i].top && _t - 25 < barriers[i].top) { barriers[i].isShot(this.tank, 'down'); return true; }
                                 break;
                             case 'down':
-                                if (_t > 525) return true;
+                                if (_t > 600) return true;
                                 if (_l + 20 > barriers[i].left && _l - 20 < barriers[i].left && _t + 20 > barriers[i].top && _t - 20 < barriers[i].top) { barriers[i].isShot(this.tank, 'up'); return true; }
                                 break;
                             case 'left':
@@ -342,7 +340,7 @@ BulletClass.prototype = {
                                 if (_l + 25 > barriers[i].left && _l - 25 < barriers[i].left && _t + 20 > barriers[i].top && _t - 20 < barriers[i].top) { barriers[i].isShot(this.tank, 'right'); return true; }
                                 break;
                             case 'right':
-                                if (_l > 660) return true;
+                                if (_l > 800) return true;
                                 if (_l + 25 > barriers[i].left && _l - 25 < barriers[i].left && _t + 20 > barriers[i].top && _t - 20 < barriers[i].top) { barriers[i].isShot(this.tank, 'left'); return true; }
                                 break;
                         }

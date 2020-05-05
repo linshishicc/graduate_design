@@ -17,7 +17,6 @@
     <script type="text/javascript" src="js/tank.factory.js"></script>
     <script type="text/javascript" src="js/tankwar.js"></script>
     <script type="text/javascript" src="js/layer.js"></script>
-
     <script>
         $(function() {
             TankWarMng.init();
@@ -59,22 +58,6 @@
     <div id="helpCont" style="display: none;">
         <div class="back">点击返回</div>
     </div>
-    <!-- game parameters -->
-    <!-- <div id="optionWin" style="display: none;">
-        <div id="sound">
-            <div class="mButton" id="mButton"></div>
-            <div class="meButton"></div>
-        </div>
-        <div id="scene">
-            <div class="lawn"></div>
-            <div class="snowfield"></div>
-            <div class="sandlot"></div>
-            <div class="random"></div>
-        </div>
-        <div class="confirm"></div>
-        <div class="cancel"></div>
-    </div> -->
-    <!-- level window -->
     <div id="levelWin" style="display: none;">
         <div class="level_1" style="display: none;">
             <div class="iss"><span class="levelnum">第1关</span></div>
@@ -145,69 +128,41 @@
         <div id="anyKey"></div>
     </div>
     <div class="login">
-        <div class="close"></div>
-        <div class="register-content">
-            <span class="name">用户注册</span>
-            <input type="text" id="reg-username" placeholder="请输入用户名...">
-            <input type="password" id="reg-password" placeholder="请输入密码...">
-            <input type="password" id="con-password" placeholder="请确认密码...">
-            <p>
-                <input type="text" class="topAlign" id="reg-verify" placeholder="请输入验证码" name="verify" required>
-                <canvas width="80" height="28" id="verifyCanvas"></canvas>
-                <img id="code_img1">
-            </p>
-            <span class="to-login">已有账号？<a href="javascript:;">点击登录</a></span>
-            <span class="register" id="submitRegister">立即注册</span>
-        </div>
-        <div class="login-content">
-            <span class="name">用户登录</span>
-            <input type="text" placeholder="请输入用户名..." id="log-username">
-            <input type="password" placeholder="请输入密码..." id="log-password">
-            <p>
-                <input type="text" class="topAlign" id="login-verify" placeholder="请输入验证码" name="verify" required>
-                <img id="code_img2">
-            </p>
-            <span class="to-register">没有账号？<a href="javascript:;">点击注册</a></span>
-            <span class="register" id="submitLogin">立即登录</span>
-        </div>
+        <form>
+            <div class="close"></div>
+            <div class="register-content">
+                <span class="name">用户注册</span>
+                <input type="text" id="reg-username" placeholder="请输入用户名...">
+                <input type="password" id="reg-password" placeholder="请输入密码...">
+                <input type="password" id="con-password" placeholder="请确认密码...">
+                <p>
+                    <input type="text" class="topAlign" id="reg-verify" placeholder="请输入验证码" name="verify" required>
+                    <canvas width="80" height="28" id="verifyCanvas"></canvas>
+                    <img id="code_img1">
+                </p>
+                <span class="to-login">已有账号？<a href="javascript:;">点击登录</a></span>
+                <span class="register" id="submitRegister">立即注册</span>
+            </div>
+            <div class="login-content">
+                <span class="name">用户登录</span>
+                <input type="text" placeholder="请输入用户名..." id="log-username">
+                <input type="password" placeholder="请输入密码..." id="log-password">
+                <p>
+                    <input type="text" class="topAlign" id="login-verify" placeholder="请输入验证码" name="verify" required>
+                    <img id="code_img2">
+                </p>
+                <span class="to-register">没有账号？<a href="javascript:;">点击注册</a></span>
+                <span class="register" id="submitLogin">立即登录</span>
+            </div>
+        </form>
     </div>
     <div class="zhezhao"></div>
     <div class="ranking">
         <div class="rank-close"></div>
         <span class="desc">玩家排行榜</span>
         <table id="rank-table">
-            <tr>
-                <th>排名</th>
-                <th>用户名</th>
-                <th>分数</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>林诗诗</td>
-                <td>378000</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>陈锴洁</td>
-                <td>378000</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>李冬敏</td>
-                <td>378000</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>郑景瑶</td>
-                <td>378000</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>郑玉诗</td>
-                <td>10</td>
-            </tr>
         </table>
-        <span class="your" id="your">您的当前排名：158，分数：</span>
+        <span class="your" id="your">您的当前排名：158，<p>分数：</p> </span>
     </div>
 </body>
 <!-- <script type="text/javascript" src="js/index.js"></script> -->

@@ -4,24 +4,19 @@
             <div class="title">关卡设置</div>
             <el-table :data="ruleData" stripe border>
                 <el-table-column prop="level" label="关卡"></el-table-column>
-                <el-table-column label="主题" prop="theme"></el-table-column>
+                <el-table-column label="主题" prop="theme">
+                    <template slot-scope="scope">
+                        <span>{{formatTheme(scope.row.theme)}}</span>
+                    </template>
+                </el-table-column>
                 <el-table-column prop="purple" label="紫坦克数"></el-table-column>
                 <el-table-column prop="blue" label="蓝坦克数"></el-table-column>
                 <el-table-column prop="yellow" label="黄坦克数"></el-table-column>
                 <el-table-column prop="deepblue" label="深蓝坦克数"></el-table-column>
                 <el-table-column prop="live" label="玩家生命"></el-table-column>
-                <el-table-column label="操作">
-                    <!-- <template slot="header">
-            <el-button
-              size="mini"
-              @click="handleAdd">添加关卡</el-button>
-                    </template>-->
+                <el-table-column label="操作">s
                     <template slot-scope="scope">
                         <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
-                        <!-- <el-button
-              size="mini"
-              type="danger"
-                        @click="handleDelete(scope.$index, scope.row)">删除</el-button>-->
                     </template>
                 </el-table-column>
             </el-table>
@@ -258,16 +253,25 @@ export default {
         getData () {
             this.$axios.get('/tank/level/levelList').then(res => {
                 this.ruleData = res.data.data;
-                this.ruleData.forEach(item => {
-                    if (item.theme == 'lawn') {
-                        item.theme = '草地';
-                    } else if (item.theme == 'snowfield') {
-                        item.theme = '雪地';
-                    } else {
-                        item.theme = '沙漠';
-                    }
-                });
+                // this.ruleData.forEach(item => {
+                //     if (item.theme == 'lawn') {
+                //         item.theme = '草地';
+                //     } else if (item.theme == 'snowfield') {
+                //         item.theme = '雪地';
+                //     } else {
+                //         item.theme = '沙漠';
+                //     }
+                // });
             });
+        },
+        formatTheme (theme) {
+            if (theme == 'lawn') {
+                return '草地';
+            } else if (theme == 'snowfield') {
+                return '雪地';
+            } else {
+                return '沙漠';
+            }
         }
     },
     mounted () {

@@ -6,7 +6,6 @@ var urls = {
     getRank: baseUrl + '/tank/score/ranking',
     getLevelList: baseUrl + '/tank/level/levelList'
 }
-
 var getAllApi = {
     init: function() {
         getAllApi.getLevelList()
@@ -148,7 +147,7 @@ var getAllApi = {
 
                     })
                     $("#rank-table").html(html)
-                    $('#your').html(`<span class="your" id="your">您的当前排名：${data.data.userMessage.rank}，分数：${data.data.userMessage.score}</span>`)
+                    $('#your').html(`<span class="your" id="your">您的当前排名：${data.data.userMessage.rank}<p>分数：${data.data.userMessage.score}</p></span>`)
                         // layer.msg(data.message, { icon: 1 });
                 } else {
                     layer.msg(data.message, { icon: 0 });
@@ -176,13 +175,12 @@ var getAllApi = {
                     level.push(obj)
                 })
                 TankWar.param.enemyNumOfLevel = level
-                TankWar.players.p1.lives = TankWar.players.p2.lives = level[0].live
+                TankWar.players.p1.lives = TankWar.players.p2.lives = level[0].live + 1
                 TankWar.param.scene = level[0].theme
             })
             .catch((error) => {
-                alert(error)
+                // alert(error)
             })
-            // return level
     },
     clearMessage: function() {
         $("#log-username").val("")

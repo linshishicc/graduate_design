@@ -13,7 +13,7 @@ var TankWar = {
     players: {
         num: 1,
         p1: {
-            lives: 10,
+            lives: 2,
             pos: {
                 x: 340,
                 y: 590
@@ -25,7 +25,7 @@ var TankWar = {
             }
         },
         p2: {
-            lives: 10,
+            lives: 2,
             pos: {
                 x: 520,
                 y: 590
@@ -79,7 +79,6 @@ var TankWar = {
         l_bg_pos: [{ p: '0%', w: 19 }, { p: '12%', w: 17 }, { p: '22.2%', w: 19 }, { p: '33.3%', w: 18 }, { p: '44.4%', w: 18 }, { p: '55.5%', w: 18 }, { p: '66.6%', w: 18 }, { p: '77.7%', w: 18 }, { p: '88.5%', w: 18 }, { p: '99.9%', w: 19 }]
     },
     developModel: 'product',
-    mySite: '',
     maps: [],
     resources: { // 需要预加载的图片和地图
         'images': {

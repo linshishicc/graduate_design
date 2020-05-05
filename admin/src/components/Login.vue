@@ -149,7 +149,7 @@ export default {
     .el-input {
         display: inline-block;
         height: 47px;
-        width: 85%;
+        // width: 85%;
         input {
             background: transparent;
             border: 0px;

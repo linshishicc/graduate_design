@@ -13,7 +13,7 @@
                 <el-table-column label="最高分数" prop="score"></el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
-                        <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">修改</el-button>
+                        <!-- <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">修改</el-button> -->
                         <el-button
                             size="mini"
                             type="danger"
@@ -108,9 +108,6 @@ export default {
             };
             this.dialogFormVisible = true;
             this.form = typeJson;
-        },
-        handleAvatarSuccess (res, file) {
-            this.form.pic = URL.createObjectURL(file.raw);
         },
         /**
          * 时间格式化
