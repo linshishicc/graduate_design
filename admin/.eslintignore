@@ -1,0 +1,6 @@
+# /node_modules/* and /bower_components/* ignored by default
+/src/views/main/components/address-book/
+/public/static/pdf/
+DataAggregation.vue
+Timepicker.vue
+Timeline.vue

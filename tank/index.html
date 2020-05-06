@@ -26,6 +26,9 @@
 </head>
 
 <body style="overflow:hidden">
+    <audio src="bomb.wav" id="myaudio" controls="controls" loop="false" hidden="true"></audio>
+    <audio src="victory.mp3" id="victory" controls="controls" loop="false" hidden="true"></audio>
+    <audio src="fail.mp3" id="fail" controls="controls" loop="false" hidden="true"></audio>
     <!-- welcome scene -->
     <div id="progress" style="display: none;">
         <div id="welcome">
@@ -88,6 +91,7 @@
                 <div id="score_p1"></div>
                 <div id="tc_p2"></div>
                 <div id="score_p2"></div>
+                <div id="total_score">总分：<span id="total">0</span></div>
             </div>
             <div id="round"></div>
             <div id="level">

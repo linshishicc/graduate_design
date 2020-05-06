@@ -24,7 +24,7 @@ html {
 }
 
 body {
-    background: rgba(36, 35, 35, 0.8);
+    background: rgba(36, 35, 35, 0.9);
     /* margin-top: 200px; */
 }
 
@@ -733,4 +733,12 @@ input::-webkit-input-placeholder {
 #code_img2 {
     /* margin-left: -15px; */
     margin: 10px 0 0 -40px;
+}
+
+#total_score {
+    position: absolute;
+    right: 25px;
+    top: 650px;
+    font-size: 22px;
+    color: #fff;
 }

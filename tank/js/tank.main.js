@@ -139,6 +139,7 @@ PlayerTank.prototype.killOne = function(type) {
 PlayerTank.prototype.die = function(over) {
     this.clear();
     TankWarMng.setTankCount(this.id, --this.lives);
+    TankWarMng.bombAudio()
     PlayerTank.superclass.die.call(this);
     if (!over && this.lives) {
         this.reborn();
@@ -146,6 +147,7 @@ PlayerTank.prototype.die = function(over) {
         TankWar.barrier.deadPlayers.push(this);
         TankWarMng.onePlayerDead();
     }
+
 };
 PlayerTank.prototype.isShot = function() {
     if (!this.isAlive) return; // 解决两颗子弹同时打中的bug
@@ -219,6 +221,7 @@ EnemyTank.prototype.die = function() {
     this.clear();
     EnemyTank.superclass.die.call(this, true);
     TankWarMng.oneEnemyDead(this.by, this.type);
+    TankWarMng.bombAudio()
 };
 EnemyTank.prototype.isShot = function(by) {
     if (!this.isAlive) return; // 解决两颗子弹同时打中的bug
@@ -275,7 +278,7 @@ var EnemyGTank = function() {
 
 extend(EnemyGTank, EnemyTank);
 
-EnemyGTank.prototype.isShot = (function() { // 我设计的NX坦克，呵呵，打他会还手的 :)
+EnemyGTank.prototype.isShot = (function() { // 我设计的牛逼坦克，哈哈，打他会还手的
     var counterattack = function() {
         this.move(this.hurtPart)
         this.fire();
@@ -297,7 +300,7 @@ EnemyGTank.prototype.isShot = (function() { // 我设计的NX坦克，呵呵，�
     ]
     return function(by, direction) {
         this.by = by;
-        this.hurtPart = direction;
+        // this.hurtPart = direction;
         methods[--this.bloods].call(this);
     }
 })();
@@ -499,6 +502,7 @@ KingBlock.prototype.die = function() {
     this.clear();
     this.explode('bomb', 10);
     TankWarMng.kingDead();
+    TankWarMng.bombAudio()
 };
 
 var LawnBlock = function(opt) {

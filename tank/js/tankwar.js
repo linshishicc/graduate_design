@@ -1,6 +1,5 @@
 var TankWarMng = {
     init: function() {
-        // console.log(sessionStorage.getItem('username'))
         setMessage.loginPlayer()
         $('#progress').fadeIn('slow', function() {
             var that = $(this);
@@ -32,10 +31,6 @@ var TankWarMng = {
                 $('#home').fadeIn('fast');
             });
         });
-        // $('#option').mouseup(function() {
-        //     $('#optionWin').animate({ height: 403, width: 319, top: 190, left: 487 }, '1000').find('*').show();
-        //     $('#optionWin #scene > div.' + TankWar.param.scene).siblings().removeClass('checked').end().addClass('checked');
-        // });
         $('#optionWin #scene > div').click(function() {
             $(this).siblings().removeClass('checked').end().addClass('checked');
         });
@@ -98,6 +93,30 @@ var TankWarMng = {
             $('#levelWin').hide().find(' > div').hide();
             TankWarMng.initGame();
         });
+    },
+    bombAudio: function() {
+        var myAuto = document.getElementById('myaudio');
+        myAuto.play();
+        setTimeout(function() {
+            myAuto.pause();
+            myAuto.load();
+        }, 1100)
+    },
+    victoryAudio: function() {
+        var myAuto = document.getElementById('victory');
+        myAuto.play();
+        setTimeout(function() {
+            myAuto.pause();
+            myAuto.load();
+        }, 5000)
+    },
+    faliAudio: function() {
+        var myAuto = document.getElementById('fail');
+        myAuto.play();
+        setTimeout(function() {
+            myAuto.pause();
+            myAuto.load();
+        }, 5000)
     },
     initGame: function() {
         TankWarMng.clear();
@@ -207,12 +226,6 @@ var TankWarMng = {
     },
     backToMenu: function() {
         location.reload()
-            // TankWarMng.clear();
-            // $('#startGame').slideUp();
-            // $('#home').slideDown(function() {
-            //     TankWarMng.initMenu();
-            // });
-
     },
     clear: function() {
         TankWar.state.exit = true;
@@ -379,32 +392,34 @@ var TankWarMng = {
             });
             TankWarMng.setScore(n.id + 'Ttl', TankWarMng.getScore(n));
             TankWar.param.total_score += TankWarMng.getScore(n)
+            $('#total').html(`总分：${TankWar.param.total_score}`)
         });
         TankWarMng.clear();
         $('#startGame').slideUp();
         $('#gameover').find('*').hide().end().slideDown(function() {
+            if (result === 'win') {
+                TankWarMng.victoryAudio()
+            } else {
+                TankWarMng.faliAudio()
+            }
             $('#wOrl').css('background', 'url(images/' + result + '.png) no-repeat');
             $('#gameover *').show();
-            var timr = setInterval(function() {
-                $('#anyKey').toggleClass('presscontinue');
-            }, 500);
+            $('#anyKey').addClass('presscontinue');
             $(document).keydown(function() {
-                clearInterval(timr);
                 $('#gameover *').hide();
                 if (result === 'win' && TankWar.param.level++ !== 4) {
-                    TankWar.players.p1.lives = TankWar.players.p2.lives = TankWar.param.enemyNumOfLevel[TankWar.param.level - 1].live
-                    TankWar.param.scene = TankWar.param.enemyNumOfLevel[TankWar.param.level - 1].theme
+                    TankWar.players.p1.lives = TankWar.players.p2.lives = TankWar.param.enemyNumOfLevel[TankWar.param.level - 1].live;
+                    TankWar.param.scene = TankWar.param.enemyNumOfLevel[TankWar.param.level - 1].theme;
                     $('#gameover').fadeOut(TankWarMng.initGame);
                 } else {
                     if (sessionStorage.getItem('username')) {
                         let param = { score: TankWar.param.total_score, level: TankWar.param.level - 1 }
                         getAllApi.updateScore(param)
-                        TankWar.param.total_score = 0
+                            // TankWar.param.total_score = 0
                     }
-                    // $('#gameover').fadeOut(TankWarMng.initMenu);
                     setTimeout(() => {
                         history.go(0)
-                    }, 2000)
+                    }, 500)
                 }
             });
         });
