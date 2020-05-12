@@ -521,8 +521,10 @@ PubMother.prototype = {
             top = $bomb.offset().top - 140,
             left = $bomb.offset().left - 500,
             timr = setInterval(function() {
+                // console.log('url(images/' + map + '/' + i + '.png) 50% 50% no-repeat')
                 $bomb.css({
                     'background': 'url(images/' + map + '/' + i + '.png) 50% 50% no-repeat',
+                    'position': 'absolute',
                     'width': '110px',
                     'height': '91px',
                     'top': top,

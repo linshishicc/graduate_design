@@ -80,56 +80,56 @@ var TankWar = {
     },
     developModel: 'product',
     maps: [],
-    resources: { // 需要预加载的图片和地图
-        'images': {
-            'bomb': {
-                'urls': ['1-10.png']
-            },
-            'bullet': {
-                'urls': ['1-6.png', 'bullet.png']
-            },
-            'etank': {
-                'urls': ['tank1.png', 'tank2.png', 'tank3.png', 'tank4.png', 'tank4-1.png', 'tank4-2.png', 'tank4-3.png']
-            },
-            'info': {
-                'urls': ['Arrow.png', 'bgrnd.bmp', 'continue.bmp', 'gomenu.bmp']
-            },
-            'levelwin': {
-                'urls': ['bgrnd.bmp', 'btn.png', 'choose.png']
-            },
-            'mapbomb': {
-                'urls': ['1-11.png']
-            },
-            'modewin': {
-                'urls': ['about.bmp', 'exit.bmp', 'help0.bmp', 'help.bmp', 'help-back.bmp', 'logout.bmp', 'option.bmp', 'star.bmp', 'star2.bmp']
-            },
-            'optionwin': {
-                'urls': ['bgrnd.bmp', 'checkbox1.png', 'checkbox2.png', 'confirm.bmp', 'exit.bmp', 'key.bmp']
-            },
-            'urls': [
-                'bgrnd1.bmp',
-                'bgrnd2.bmp',
-                'bgrnd3.bmp',
-                'exit.png',
-                'fail.png',
-                'gameover.bmp',
-                'king.png',
-                'level.png',
-                'levelnumber.png',
-                'map1.png',
-                'map2.png',
-                'map3.png',
-                'map4.png',
-                'presscontinue.png',
-                'scorenum.png',
-                'tank.png',
-                'tankcount.png',
-                'totalnum.png',
-                'win.png'
-            ]
-        },
-        'maps': {
-            'urls': ['1-3.json']
-        }
-    }
+    // resources: { // 需要预加载的图片和地图
+    //     'images': {
+    //         'bomb': {
+    //             'urls': ['1-10.png']
+    //         },
+    //         'bullet': {
+    //             'urls': ['1-6.png', 'bullet.png']
+    //         },
+    //         'etank': {
+    //             'urls': ['tank1.png', 'tank2.png', 'tank3.png', 'tank4.png', 'tank4-1.png', 'tank4-2.png', 'tank4-3.png']
+    //         },
+    //         'info': {
+    //             'urls': ['Arrow.png', 'bgrnd.bmp', 'continue.bmp', 'gomenu.bmp']
+    //         },
+    //         'levelwin': {
+    //             'urls': ['bgrnd.bmp', 'btn.png', 'choose.png']
+    //         },
+    //         'mapbomb': {
+    //             'urls': ['1-11.png']
+    //         },
+    //         'modewin': {
+    //             'urls': ['about.bmp', 'exit.bmp', 'help0.bmp', 'help.bmp', 'help-back.bmp', 'logout.bmp', 'option.bmp', 'star.bmp', 'star2.bmp']
+    //         },
+    //         'optionwin': {
+    //             'urls': ['bgrnd.bmp', 'checkbox1.png', 'checkbox2.png', 'confirm.bmp', 'exit.bmp', 'key.bmp']
+    //         },
+    //         'urls': [
+    //             'bgrnd1.bmp',
+    //             'bgrnd2.bmp',
+    //             'bgrnd3.bmp',
+    //             'exit.png',
+    //             'fail.png',
+    //             'gameover.bmp',
+    //             'king.png',
+    //             'level.png',
+    //             'levelnumber.png',
+    //             'map1.png',
+    //             'map2.png',
+    //             'map3.png',
+    //             'map4.png',
+    //             'presscontinue.png',
+    //             'scorenum.png',
+    //             'tank.png',
+    //             'tankcount.png',
+    //             'totalnum.png',
+    //             'win.png'
+    //         ]
+    //     },
+    //     'maps': {
+    //         'urls': ['1-3.json']
+    //     }
+    // }
 };

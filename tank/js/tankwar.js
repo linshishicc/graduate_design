@@ -1,10 +1,10 @@
 var TankWarMng = {
     init: function() {
-        setMessage.loginPlayer()
+        setMessage.loginPlayer() // 调用该方法实现登录与否的显示
+        setMessage.setLevel() // 调用该方法来开放关卡数，比如用户上一次最高的关卡是第3关，那么第四关不开放
         $('#progress').fadeIn('slow', function() {
-            var that = $(this);
-            new PreLoad(TankWar.resources, function() {
-                that.fadeOut('slow', function() {
+            new PreLoad(TankWar.resources, () => {
+                $(this).fadeOut('slow', function() {
                     TankWarMng.initMenu();
                 });
             });
@@ -15,6 +15,7 @@ var TankWarMng = {
         $('#home').find('*').show().end().fadeIn('slow');
         $('#star,#star2').mouseup(function() {
             TankWar.players.num = $(this).attr('class');
+            // alert(TankWar.players.num)
             $('#home > div').hide();
             $('#home').slideUp();
             $('#levelWin').slideDown(function() {
@@ -43,7 +44,9 @@ var TankWarMng = {
         });
         $('#exit').click(function() {
             sessionStorage.setItem('username', '')
+            sessionStorage.setItem('maxLevel', '')
             setMessage.loginPlayer()
+            setMessage.setLevel()
             layer.msg('退出成功，您仍然可以玩游戏，但分数不计入排行榜', { icon: 1 });
         });
         // 点击出现登录页面
@@ -85,10 +88,7 @@ var TankWarMng = {
                 $('.ranking').css({ display: 'block' });
             }
         });
-        $('#levelWin .iss').hover(function() {
-            $('#levelWin .iss').removeClass('selected');
-            $(this).addClass('selected');
-        }).click(function() {
+        $('#levelWin .iss').click(function() {
             TankWar.param.level = $(this).parent().attr('class').split('_')[1];
             $('#levelWin').hide().find(' > div').hide();
             TankWarMng.initGame();
@@ -200,25 +200,6 @@ var TankWarMng = {
         $('#goMenu, #continue').mouseup(function() {
             processInfo();
         });
-        // $(document).keydown(function(e) {
-        //     e = e || window.event;
-        //     var key = e.which || e.keyCode;
-        //     switch (key) {
-        //         case 27:
-        //             showInfo('goMenu');
-        //             break;
-        //         case 38:
-        //             if ($('#info:visible').length == 1) $('#info .select').toggleClass('selected');
-        //             break;
-        //         case 40:
-        //             if ($('#info:visible').length == 1) $('#info .select').toggleClass('selected');
-        //             break;
-        //         case 13:
-        //             if ($('#info:visible').length == 1) processInfo();
-        //             break;
-        //     }
-        // });
-        // info menu shows on blur
         $(window).blur(function() {
             if (document.activeElement == document.body)
                 showInfo('continue');
@@ -230,8 +211,6 @@ var TankWarMng = {
     clear: function() {
         TankWar.state.exit = true;
         $(document).unbind();
-        // $(window).unbind();
-        // $('*').unbind();
         $('#container *').remove();
         $('#related').hide();
         $('#tc_p1, #tc_p2, #score_p1, #score_p2, #tc_enemyR, #tc_enemyB, #tc_enemyY, #tc_enemyG').html('');
@@ -252,10 +231,8 @@ var TankWarMng = {
             }, 1000);
         }
     },
-    /**
-     * 敌军死亡，通关成功
-     */
     oneEnemyDead: (function() {
+        // alert('5555')
         var isAnyEnemies = function() {
             for (var i = 0, len = TankWar.enemies.types.length; i < len; i++) {
                 if (TankWar.enemies[TankWar.enemies.types[i]].leftNum) {
@@ -292,6 +269,12 @@ var TankWarMng = {
         if (typeof tank === 'object') {
             $score = $('#score_' + tank.id);
             _n = TankWarMng.getScore(tank) + '';
+            // if (TankWar.players.num == 2) {
+            //     TankWar.param.total_score += n / 2
+            // } else {
+            TankWar.param.total_score += n
+                // }
+            $('#total').html(`${TankWar.param.total_score}`)
         } else {
             $score = $('#' + tank);
             _n = n + '';
@@ -391,8 +374,6 @@ var TankWarMng = {
                 TankWarMng.setScore(n.id + m, n.kills[m] * TankWar.util.type_score[m]);
             });
             TankWarMng.setScore(n.id + 'Ttl', TankWarMng.getScore(n));
-            TankWar.param.total_score += TankWarMng.getScore(n)
-            $('#total').html(`总分：${TankWar.param.total_score}`)
         });
         TankWarMng.clear();
         $('#startGame').slideUp();
@@ -405,6 +386,16 @@ var TankWarMng = {
             $('#wOrl').css('background', 'url(images/' + result + '.png) no-repeat');
             $('#gameover *').show();
             $('#anyKey').addClass('presscontinue');
+            if ((result === 'fail' && sessionStorage.getItem('username')) || TankWar.param.level == 4) {
+                let param
+                if (TankWar.players.num == 2) {
+                    param = { score: TankWar.param.total_score / 2, level: TankWar.param.level }
+                } else {
+                    param = { score: TankWar.param.total_score, level: TankWar.param.level }
+                }
+                sessionStorage.setItem('maxLevel', param.level)
+                getAllApi.updateScore(param)
+            }
             $(document).keydown(function() {
                 $('#gameover *').hide();
                 if (result === 'win' && TankWar.param.level++ !== 4) {
@@ -412,16 +403,37 @@ var TankWarMng = {
                     TankWar.param.scene = TankWar.param.enemyNumOfLevel[TankWar.param.level - 1].theme;
                     $('#gameover').fadeOut(TankWarMng.initGame);
                 } else {
-                    if (sessionStorage.getItem('username')) {
-                        let param = { score: TankWar.param.total_score, level: TankWar.param.level - 1 }
-                        getAllApi.updateScore(param)
-                            // TankWar.param.total_score = 0
-                    }
                     setTimeout(() => {
                         history.go(0)
                     }, 500)
                 }
             });
         });
+    }
+};
+var PreLoad = (function() {
+    // 构造器
+    return function(urlObj, callback) {
+        this.callback = callback;
+        this.progressBar(100);
+    }
+})();
+PreLoad.prototype = {
+    error: function(url) {
+        throw new Error('load ' + url + ' failed.');
+    },
+    progressBar: function(percent, url, type) {
+        if (url && type) {
+            $('#percent span').text(percent);
+            $('#loading span').text(type + ': ' + url.substr(url.lastIndexOf('/') + 1, url.length));
+        }
+        $('#bar').stop().animate({ left: 550 - 550 * percent / 100 }, 200);
+        if (percent === 100) this.over();
+    },
+    over: function() {
+        var that = this;
+        setTimeout(function() {
+            that.callback();
+        }, 500);
     }
 };

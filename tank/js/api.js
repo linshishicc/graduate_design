@@ -1,4 +1,4 @@
-var baseUrl = 'http://localhost:3000'
+var baseUrl = 'http://47.107.105.199:3000'
 var urls = {
     usersAdd: baseUrl + '/tank/users/usersAdd',
     userLogin: baseUrl + '/tank/login/userLogin',
@@ -26,11 +26,8 @@ var getAllApi = {
                 return;
             }
             var newRand = rands.join(',').replace(/,/g, "").toUpperCase();
-            // alert(newRand.replace(/,/g, "").toUpperCase())
             //下面就是判断是否== 的代码，无需解释
             var oValue = $('#reg-verify').val().toUpperCase();
-            // console.log(oValue)
-            // console.log(newRand)
             if (newRand !== oValue) {
                 layer.msg('验证码错误！', { icon: 0 });
                 return;
@@ -85,11 +82,13 @@ var getAllApi = {
                     if (data.status == 1) {
                         layer.msg('登录成功！', { icon: 1 });
                         sessionStorage.setItem('username', data.result.userInfo.username)
+                        sessionStorage.setItem('maxLevel', data.result.userInfo.maxLevel)
                         $('.login').css({ 'height': '0', 'top': '-370px' });
                         $('.login-content').css({ display: 'none' });
                         $('.register-content').css({ display: 'none' });
                         $('.zhezhao').css({ display: 'none' });
                         setMessage.loginPlayer()
+                        setMessage.setLevel()
                         getAllApi.clearMessage()
                         setMessage.updateVerify()
                     } else {
@@ -98,6 +97,9 @@ var getAllApi = {
                 }).catch()
         })
     },
+    /**
+     * 更新用户分数
+     */
     updateScore: (param) => {
         param.username = sessionStorage.getItem('username')
         fetch(urls.updateScore, {
@@ -115,6 +117,9 @@ var getAllApi = {
                 }
             }).catch()
     },
+    /**
+     * 获取排名列表
+     */
     getRank: () => {
         param = { username: sessionStorage.getItem('username') }
         fetch(urls.getRank, {
@@ -154,6 +159,9 @@ var getAllApi = {
                 }
             }).catch()
     },
+    /**
+     * 获取关卡信息列表
+     */
     getLevelList: function() {
         let level = []
         var opts = {
@@ -182,6 +190,9 @@ var getAllApi = {
                 // alert(error)
             })
     },
+    /**
+     * 清除信息，将填写的用户信息清除
+     */
     clearMessage: function() {
         $("#log-username").val("")
         $("#log-password").val("")
@@ -193,24 +204,63 @@ var getAllApi = {
     }
 }
 var setMessage = {
+    /***
+     * 设置如果是登录状态，显示用户名和退出登录的按钮，否则只显示登录的按钮
+     */
     loginPlayer: function() {
         if (sessionStorage.getItem('username')) {
-            // $('#login').css({ display: 'none' })
             $('#player').html(`<img src="./images/player.png" alt="">${sessionStorage.getItem('username')}`)
             $('#player').css({ opacity: 1, 'z-index': 1 })
             $('#login').css({ opacity: 0 })
             $('#exit').css({ display: 'flex', opacity: 1, 'z-index': 0 })
-                // document.getElementById('login').style.opacity = '0'
         } else {
             $('#player').css({ opacity: 0, 'z-index': -1 })
             $('#login').css({ opacity: 1 })
             $('#exit').css({ display: 'none', opacity: 0, 'z-index': -1 })
         }
     },
+    /**
+     * 点击更新验证码
+     */
     updateVerify: function() {
         $('#verifyCanvas').remove();
         $('#login-verify').after('<canvas width="80" height="28" id="verifyCanvas"></canvas>')
         $('#reg-verify').after('<canvas width="80" height="28" id="verifyCanvas"></canvas>')
         drawCode();
+    },
+    /**
+     * 设关卡，如果没有登录则每一次只能从第一关开始，否则可以从上次完成游戏的最高的以关开始
+     */
+    setLevel: function() {
+        let html = ``
+        if (sessionStorage.getItem('maxLevel')) {
+            for (let i = 1; i <= 4; i++) {
+                let message
+                i == 4 ? message = `终极关卡` : message = `第${i}关`
+                if (i <= sessionStorage.getItem('maxLevel')) {
+                    html = html + `<div class="level_${i}" style="display: none;">
+                        <div class="iss"><span class="levelnum">${message}</span></div>
+                    </div>`
+                } else {
+                    html = html + `<div id="level_${i}" style="display: none;">
+                        <div class="iss"><span class="levelnum">${message}</span></div>
+                    </div>`
+                }
+            }
+        } else {
+            html = `<div class="level_1" style="display: none;">
+                    <div class="iss"><span class="levelnum">第1关</span></div>
+                </div>
+                <div id="level_2" style="display: none;">
+                    <div class="iss"><span class="levelnum">第2关</span></div>
+                </div>
+                <div id="level_3" style="display: none;">
+                    <div class="iss"><span class="levelnum">第3关</span></div>
+                </div>
+                <div id="level_4" style="display: none;">
+                    <div class="iss"><span class="levelnum">终极关卡</span></div>
+                </div>`
+        }
+        $('#levelWin').html(html)
     }
 }

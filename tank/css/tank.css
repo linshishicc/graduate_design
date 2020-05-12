@@ -24,7 +24,7 @@ html {
 }
 
 body {
-    background: rgba(36, 35, 35, 0.9);
+    background: #2F302D;
     /* margin-top: 200px; */
 }
 
@@ -48,7 +48,7 @@ body {
 }
 
 #progress {
-    background: white;
+    background: #fff;
     font-family: Comic Sans MS, Times New Roman;
 }
 
@@ -72,7 +72,7 @@ body {
 
 #home {
     background: url(../images/bg1.jpg) no-repeat;
-    background-size: auto 100%;
+    /* background-size: auto 100%; */
 }
 
 #welcome {
@@ -88,7 +88,7 @@ body {
 }
 
 #levelWin {
-    background: url(../images/levelWin/bgrnd.bmp) no-repeat;
+    background: url(../images/levelwin/bgrnd.png) no-repeat;
     background-size: 100% 100%;
 }
 
@@ -182,18 +182,19 @@ body {
 #option,
 #login,
 #player {
-    background-color: #989898;
+    background-color: #292929;
     color: #fff;
     font-size: 22px;
-    height: 36px;
-    width: 140px;
-    top: 200px;
+    height: 50px;
+    width: 160px;
+    top: 220px;
     left: 430px;
     cursor: pointer;
     /* border: 1px solid #000; */
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
 }
 
 #star:hover,
@@ -209,41 +210,42 @@ body {
 
 #login,
 #player {
-    top: 150px;
+    top: 160px;
 }
 
 #player {
-    font-size: 16px;
+    font-size: 22px;
     z-index: -1;
-    background-color: rgba(255, 255, 255, 0);
-    border: 1px solid #989898;
-    border-radius: 3px;
+    border: 2px solid #292929;
+    background-color: rgba(255, 255, 255, 0)!important;
+    border-radius: 10px;
     cursor: auto;
 }
 
 #player img {
     width: 30px;
     height: 30px;
-    margin-right: 5px;
+    margin-left: -15px;
+    margin-right: 10px;
 }
 
 #star2 {
-    top: 250px;
+    top: 280px;
     /* left: 330px; */
 }
 
 #help {
-    top: 300px;
+    top: 340px;
     /* left: 350px; */
 }
 
 #exit {
-    top: 400px;
+    top: 460px;
     /* left: 350px; */
 }
 
 #option {
-    top: 350px;
+    top: 400px;
     /* left: 350px; */
 }
 
@@ -339,47 +341,79 @@ body {
 .level_1,
 .level_2,
 .level_3,
-.level_4 {
+.level_4,
+#level_2,
+#level_3,
+#level_4 {
     /* background: url(../images/levelWin/btn.png) 0% 50% no-repeat; */
-    background: none !important;
     cursor: pointer;
     text-align: center;
     font-size: 15px;
     font-weight: 700;
     color: white;
-    height: 45px;
-    width: 160px;
-    border-radius: 5px;
-    border: 1px solid #fff;
+    height: 85px;
+    width: 180px;
+    border-radius: 30px;
+    /* border: 3px solid #000; */
+    position: absolute;
+    background-color: #3b3b3b;
+}
+
+.level_1:hover,
+.level_2:hover,
+.level_3:hover,
+.level_4:hover {
+    color: yellow;
 }
 
 .level_1 {
-    top: 216px;
-    left: 77px;
+    top: 355px;
+    left: 95px;
 }
 
-.level_2 {
-    top: 216px;
-    left: 245px;
+.level_2,
+#level_2 {
+    top: 355px;
+    left: 308px;
 }
 
-.level_3 {
-    top: 216px;
-    left: 412px;
+.level_3,
+#level_3 {
+    top: 355px;
+    left: 521px;
 }
 
-.level_4 {
-    top: 216px;
-    left: 580px;
+.level_4,
+#level_4 {
+    top: 355px;
+    left: 734px;
+}
+
+#level_2,
+#level_3,
+#level_4 {
+    cursor: auto;
+    background-color: #3b3b3b;
+    background-image: url('../images/forbiden.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#level_2:hover,
+#level_3:hover,
+#level_4:hover {
+    color: #fff;
 }
 
 .iss {
-    height: 39px;
+    height: 85px;
+    font-size: 28px;
+    line-height: 60px;
 }
 
 #levelWin .selected {
     /* background: url(../images/levelWin/choose.png); */
-    color: red;
+    color: yellow;
     /* height: 40px;
     width: 130px; */
 }
